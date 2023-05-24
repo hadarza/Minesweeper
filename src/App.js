@@ -1,9 +1,9 @@
-import Board from './components/DashBoard/Board/Board'
+import Game from './components/Game/Game';
 import './scss/main.scss'
 function App() {
   return (
     <div className="App">
-      <Board/>
+      <Game/>
     </div>
   );
 }

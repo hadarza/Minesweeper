@@ -18,7 +18,7 @@
 /*align items*/
 /* justify content */
 /*colors*/
-.Board-game {
+.game-page {
   display: flex;
   -webkit-flex-direction: horizontal;
   -moz-flex-direction: horizontal;
@@ -102,8 +102,7 @@
   width: 100%;
 }
 
-/*difficulty */
-.difficulty > p {
+.difficulty > p, .Time > p {
   display: flex;
   -webkit-flex-direction: horizontal;
   -moz-flex-direction: horizontal;
@@ -125,6 +124,30 @@
 }
 .logo > img {
   width: 100%;
+}
+
+.cell {
+  width: 2rem;
+  height: 2rem;
+  background-color: white;
+  margin: 0.2rem;
+  border-radius: 3px;
+  display: flex;
+  -webkit-flex-direction: horizontal;
+  -moz-flex-direction: horizontal;
+  -ms-flex-direction: row;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  justify-content: center;
 }
 
 body, html, p {

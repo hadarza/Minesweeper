@@ -1,4 +1,4 @@
-.Board-game{
+.game-page{
     @include flex-direction(row);
     @include justify-content(center);
     width: 60%;
@@ -39,8 +39,7 @@
         }
 }
 
-/*difficulty */
-.difficulty{
+.difficulty,.Time{
     >p{
         @include flex-direction(row);
         @include justify-content(center);

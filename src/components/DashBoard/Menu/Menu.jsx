@@ -1,17 +1,35 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import {images} from '../../../constants/index'
+
+import { useSelector,useDispatch } from 'react-redux'
+
 const Menu = () => {
+    const [Timer, setTimer] = useState(0)
+
+    const DashBoard = useSelector((state) => state.dashboard);
+    const difficulty = DashBoard.difficulty; 
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+          setTimer((prevTimer) => prevTimer + 1);
+        }, 1000);
+    
+        return () => {
+          clearInterval(interval);
+        };
+      }, []);
+    
   return (
     <div className='menu'>
         <div className='time-logo'>
             <div className='difficulty'>
                 <p>קושי</p>
-                <p>קל</p>
+                <p>{difficulty}</p>
             </div>
                 
             <div className='Time'>
                 <p>טיימר</p>
-                <p>1000</p>
+                <p>{Timer}</p>
             </div>
         </div>
        
