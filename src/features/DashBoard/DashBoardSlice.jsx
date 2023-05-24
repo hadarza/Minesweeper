@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 export const DashBoardSlice = createSlice({
-  name: 'counter',
+  name: 'dashboard',
   initialState: {
     value: 0
   },
@@ -22,4 +22,7 @@ export const DashBoardSlice = createSlice({
   }
 })
 
-export const { increment, decrement, incrementByAmount } = counterSlice.actions
+export const { increment, decrement, incrementByAmount } = DashBoardSlice.actions
+
+export default DashBoardSlice.reducer
+
