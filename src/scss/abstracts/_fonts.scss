@@ -1,1 +1,25 @@
 /*fonts*/
+
+@font-face {
+    font-family: "Heebo-SemiBold";
+    src: local("Heebo-SemiBold"),
+     url("../../fonts/Heebo-SemiBold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Heebo-Regular";
+    src: local("Heebo-Regular"),
+     url("../../fonts/Heebo-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Heebo-ExtraLight";
+    src: local("Heebo-ExtraLight"),
+     url("../../fonts/Heebo-ExtraLight.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Heebo-Bold";
+    src: local("Heebo-Bold"),
+     url("../../fonts/Heebo-Bold.ttf") format("truetype");
+}

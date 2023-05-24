@@ -4,9 +4,9 @@ import Menu from '../Menu/Menu'
 const Board = () => {
   return (
     <div className='Board-game'>
-        <Menu/>
-
+      <Menu/>
     </div>
+
   )
 }
 

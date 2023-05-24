@@ -1,0 +1,58 @@
+.Board-game{
+    @include flex-direction(row);
+    @include justify-content(center);
+    width: 60%;
+}
+.menu{
+    width: 100%;
+    height: 7rem;
+    position: relative;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    transform-origin: left bottom;
+    border-radius: 0px 0px 10px 10px;
+    @include flex-direction(row);
+    @include justify-content(space-around);
+    @include align-items(center);
+}
+
+.container-flag-reset, .time-logo{
+    width: 12rem;
+    @include flex-direction(row);
+    @include align-items(center);
+    @include justify-content(space-around);
+}
+/*flag & reset*/
+
+.flag-section,.reset-section{
+        @include align-items(center);
+        @include flex-direction(column);
+        p{
+            margin: 0;
+        }
+        .div-img{
+            width: 2rem;
+            height: 2rem;
+            >img{
+                width: 100%;
+            }
+        }
+}
+
+/*difficulty */
+.difficulty{
+    >p{
+        @include flex-direction(row);
+        @include justify-content(center);
+    }
+}
+
+/*wix logo*/
+.logo{
+    width: 7rem;
+    position: relative;
+    top: 3rem;
+    >img{
+        width: 100%;
+    }
+}

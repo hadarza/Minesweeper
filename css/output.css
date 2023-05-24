@@ -1,0 +1,153 @@
+/*fonts*/
+@font-face {
+  font-family: "Heebo-SemiBold";
+  src: local("Heebo-SemiBold"), url("../../fonts/Heebo-SemiBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Heebo-Regular";
+  src: local("Heebo-Regular"), url("../../fonts/Heebo-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Heebo-ExtraLight";
+  src: local("Heebo-ExtraLight"), url("../../fonts/Heebo-ExtraLight.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Heebo-Bold";
+  src: local("Heebo-Bold"), url("../../fonts/Heebo-Bold.ttf") format("truetype");
+}
+/*align items*/
+/* justify content */
+/*colors*/
+.Board-game {
+  display: flex;
+  -webkit-flex-direction: horizontal;
+  -moz-flex-direction: horizontal;
+  -ms-flex-direction: row;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  justify-content: center;
+  width: 60%;
+}
+
+.menu {
+  width: 100%;
+  height: 7rem;
+  position: relative;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  transform-origin: left bottom;
+  border-radius: 0px 0px 10px 10px;
+  display: flex;
+  -webkit-flex-direction: horizontal;
+  -moz-flex-direction: horizontal;
+  -ms-flex-direction: row;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-pack: distribute;
+  -webkit-justify-content: space-around;
+  -moz-justify-content: space-around;
+  justify-content: space-around;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  align-items: center;
+}
+
+.container-flag-reset, .time-logo {
+  width: 12rem;
+  display: flex;
+  -webkit-flex-direction: horizontal;
+  -moz-flex-direction: horizontal;
+  -ms-flex-direction: row;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  align-items: center;
+  -ms-flex-pack: distribute;
+  -webkit-justify-content: space-around;
+  -moz-justify-content: space-around;
+  justify-content: space-around;
+}
+
+/*flag & reset*/
+.flag-section, .reset-section {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  align-items: center;
+  display: flex;
+  -webkit-flex-direction: vertical;
+  -moz-flex-direction: vertical;
+  -ms-flex-direction: column;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+}
+.flag-section p, .reset-section p {
+  margin: 0;
+}
+.flag-section .div-img, .reset-section .div-img {
+  width: 2rem;
+  height: 2rem;
+}
+.flag-section .div-img > img, .reset-section .div-img > img {
+  width: 100%;
+}
+
+/*difficulty */
+.difficulty > p {
+  display: flex;
+  -webkit-flex-direction: horizontal;
+  -moz-flex-direction: horizontal;
+  -ms-flex-direction: row;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  justify-content: center;
+}
+
+/*wix logo*/
+.logo {
+  width: 7rem;
+  position: relative;
+  top: 3rem;
+}
+.logo > img {
+  width: 100%;
+}
+
+body, html, p {
+  margin: 0;
+}
+
+.App {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  -webkit-flex-direction: horizontal;
+  -moz-flex-direction: horizontal;
+  -ms-flex-direction: row;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  justify-content: center;
+  font-family: "Heebo-Bold";
+  font-size: 16px;
+  background-color: #D9E03A;
+}
+
+/*# sourceMappingURL=output.css.map */

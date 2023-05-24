@@ -1,0 +1,12 @@
+body, html,p{
+    margin: 0;
+  }
+.App{
+    width: 100vw;
+    height: 100vh;
+    @include flex-direction(row);
+    @include justify-content(center);
+    font-family: "Heebo-Bold";
+    font-size: 16px;
+    background-color: $yellow;
+}
