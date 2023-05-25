@@ -12,3 +12,19 @@
     background-color:gainsboro;
     cursor: pointer;
 }
+@for $indexA from 0 through 10 {
+    @for $indexB from 0 through 10 {
+      .cell-#{$indexA}-#{$indexB} {
+        @include cell($indexA,$indexB,false)
+      }
+    }
+}
+
+@for $indexA from 0 through 10 {
+    @for $indexB from 0 through 10 {
+      .cellActive-#{$indexA}-#{$indexB} {
+        @include cell($indexA,$indexB,true)
+      }
+    }
+}
+

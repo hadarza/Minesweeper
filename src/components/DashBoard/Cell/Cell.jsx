@@ -1,11 +1,21 @@
-import React,{useEffect,useState} from 'react'
+import React,{useEffect,useRef} from 'react'
 import { useDispatch } from 'react-redux'
 import { setclickedLocation } from '../../../features/DashBoard/DashBoardSlice'
 const Cell = ({locationX,locationY,grid}) => {
   const dispatch = useDispatch()  
+  const Ref = useRef()
 
+  useEffect(() => {
+    if(grid.length > 0){
+      if(grid[locationX][locationY].revealed){
+        Ref.current.classList.remove(`cell-${locationX}-${locationY}`)
+        Ref.current.classList.add(`cellActive-${locationX}-${locationY}`)
+      }
+    }
+  }, [grid])
+  
   return (
-    <div className='cell' onClick={()=>{
+    <div className={`cell cell-${locationX}-${locationY}`} ref={Ref} onClick={(e)=>{
       let location = [locationX,locationY]
        dispatch(setclickedLocation(location))
       }}>

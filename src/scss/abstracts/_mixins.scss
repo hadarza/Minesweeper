@@ -14,8 +14,7 @@
     -webkit-flex-direction:column;
     flex-direction:column;
     }
-    @else
-    {
+    @else{
     -webkit-flex-direction:horizontal;
     -moz-flex-direction:horizontal;
     -ms-flex-direction:row;
@@ -63,3 +62,16 @@
     -moz-justify-content: $value;
     justify-content: $value;
   }
+
+@mixin cell($indexA,$indexB,$active){
+    @if($active){
+        @if (($indexA+$indexB) % 2 == 0){
+            background-color: $brown1;
+        } @else {background-color: $brown2;}
+    }
+    @else{
+        @if (($indexA+$indexB) % 2 == 0){
+            background-color: yellowgreen;
+        } @else {background-color: $green_board2;}
+    }
+}

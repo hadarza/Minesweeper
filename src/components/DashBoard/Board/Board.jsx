@@ -68,10 +68,9 @@ const UpdateMatBasedOnBombs =()=>{
        }
     }
   }
-  console.log(matrix);
   setGrid(matrix)
 }
-
+/* the function return true if the given [x,y] location is a bomb */
 const IsYourNeighborBomb = ({x,y})=>{
   if(x >= 0 && x< size && y >= 0 && y < size){
     if(matrix[x][y].value == 'x') 
@@ -101,15 +100,13 @@ const RevealCells =() =>{
 }
 
 const FindBorderNeighbor = (x,y)=>{
-  
   for(let xAxis=-1;xAxis<=1;xAxis++){
     for(let yAxis=-1;yAxis<=1;yAxis++){
       if(isValidIndex(x,y,xAxis,yAxis)){
-          if(matrix[x][y].value == 0){
-            matrix[x+xAxis][y+yAxis].revealed = true;
-          }
-
-      }
+        if(matrix[x][y].value == 0){
+          matrix[x+xAxis][y+yAxis].revealed = true;
+        }
+     }
     }
   }
   
@@ -147,7 +144,11 @@ useEffect(() => {
       {matrix.map((row, rowIndex) => (
         <div key={`row-${rowIndex} row`}>
           {row.map((element, columnIndex) => (
-            <Cell locationX={rowIndex} locationY={columnIndex} grid={grid} key={`${rowIndex}-${columnIndex}`} />
+            <Cell
+            locationX={rowIndex}
+            locationY={columnIndex} 
+            grid={grid}
+            key={`${rowIndex}-${columnIndex}`} />
           ))}
         </div>
       ))}
