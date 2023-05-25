@@ -37,7 +37,7 @@ const PlacingBombs = (clickLocation) =>{
       x = Math.floor(Math.random()*(size-1))
       y = Math.floor(Math.random()*(size-1))
 
-       if(matrix[x][y].value != 'x' && !NotAllowToHavaBomb(clickLocation[0],clickLocation[1],x,y) ){
+       if(matrix[x][y].value != 'x' && !NotAllowToHaveBomb(clickLocation[0],clickLocation[1],x,y) ){
         // put a bomb at random location on board if not exist
          matrix[x][y]={
           ...matrix[x][y],
@@ -50,7 +50,7 @@ const PlacingBombs = (clickLocation) =>{
   UpdateMatBasedOnBombs()
 }
 
-const NotAllowToHavaBomb =(xLocation,yLocation,x,y) =>{
+const NotAllowToHaveBomb =(xLocation,yLocation,x,y) =>{
   // make sure that [x,y] isnt the same location as [clickX,clickY] or neighbors
   if((x == xLocation || x-1 == xLocation || x+1 == xLocation) && (y == yLocation || y-1 == yLocation || y+1 == yLocation))
     return true;
@@ -97,25 +97,42 @@ const countNeighborsBomb=(x,y)=>{
 }
 
 const RevealCells =() =>{
-  // FindZeroNeighbor()
+  FindZeroNeighbor( clickLocation[0], clickLocation[1])
 }
 
-const FindZeroNeighbor = ()=>{
-  let x = clickLocation[0]
-  let y = clickLocation[1]
+const FindBorderNeighbor = (x,y)=>{
+  
   for(let xAxis=-1;xAxis<=1;xAxis++){
     for(let yAxis=-1;yAxis<=1;yAxis++){
-      console.log(matrix[x+xAxis][y+yAxis]);
-      //  if(matrix[x+xAxis][y+yAxis].value == 0) {
-      // //   matrix[x+xAxis][y+yAxis] = {
-      // //     ...matrix[x+xAxis,y+yAxis],
-      // //     revealed: true}
+      if(isValidIndex(x,y,xAxis,yAxis)){
+          if(matrix[x][y].value == 0){
+            matrix[x+xAxis][y+yAxis].revealed = true;
+          }
 
-      //   }
-        console.log(matrix);
+      }
     }
   }
-  console.log(matrix);
+  
+}
+/*Flood fill algorithm */
+const FindZeroNeighbor = (x, y) => {
+  if (matrix[x][y].value !== 0 || matrix[x][y].revealed) {
+    return;
+  }
+  for (let xAxis = -1; xAxis <= 1; xAxis++) {
+    for (let yAxis = -1; yAxis <= 1; yAxis++) {
+      if (isValidIndex(x,y,xAxis,yAxis)) {
+          matrix[x][y].revealed = true;
+          FindZeroNeighbor(x + xAxis, y + yAxis);
+        }
+    }
+  }
+   // reveal his neighbors - create for us a border of cells around the 0's cells
+   FindBorderNeighbor(x,y);
+}
+
+const isValidIndex = (x,y,xAxis,yAxis)=>{
+  return x + xAxis < size && x + xAxis >= 0 && y + yAxis < size && y + yAxis >= 0
 }
 
 useEffect(() => {

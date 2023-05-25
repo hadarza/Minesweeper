@@ -9,7 +9,11 @@ const Cell = ({locationX,locationY,grid}) => {
       let location = [locationX,locationY]
        dispatch(setclickedLocation(location))
       }}>
-    {grid.length > 0  ? grid[locationX][locationY].value : ''}
+    {grid.length > 0 &&  grid[locationX][locationY].revealed ? 
+    (grid[locationX][locationY].value  != 0 ) ?
+      grid[locationX][locationY].value 
+      :'' 
+    : ''}
     </div>
   )
 }
