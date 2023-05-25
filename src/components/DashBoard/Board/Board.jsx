@@ -10,7 +10,7 @@ const Board = () => {
   const properites = {
     revealed: false,
     flagged: false,
-    value: 0
+    value: '0'
   }
 
   // based on difficulty - we decide the size of our matrix
@@ -28,7 +28,6 @@ const Board = () => {
       matrix[i][j] = properites;
     }
   }
-  
 /* placing bombs on the board */
 /*we don't put a bomb where the user click and all his 8 neighbors!*/
 const PlacingBombs = (clickLocation) =>{
@@ -40,10 +39,10 @@ const PlacingBombs = (clickLocation) =>{
 
        if(matrix[x][y].value != 'x' && !NotAllowToHavaBomb(clickLocation[0],clickLocation[1],x,y) ){
         // put a bomb at random location on board if not exist
-        matrix[x][y] = {
+         matrix[x][y]={
           ...matrix[x][y],
           value: 'x'
-        }
+         }
         // reduce number of bombs in 1
          CurrentBombs--
      }
@@ -63,11 +62,13 @@ const UpdateMatBasedOnBombs =()=>{
     for(var j=0;j<size;j++){
       // forEach on all my neighbors and count how many bombs we have around me
       if(matrix[i][j].value != 'x' ) 
-        matrix[i][j] = {
-          ...matrix[i,j],
-          value: countNeighborsBomb(i,j)}
+      matrix[i][j]={
+        ...matrix[i][j],
+        value: countNeighborsBomb(i,j)
+       }
     }
   }
+  console.log(matrix);
   setGrid(matrix)
 }
 
@@ -95,22 +96,32 @@ const countNeighborsBomb=(x,y)=>{
   return neighborsBomb;
 }
 
-// const RevealCells =(x,y) =>{
+const RevealCells =() =>{
+  // FindZeroNeighbor()
+}
 
-// }
+const FindZeroNeighbor = ()=>{
+  let x = clickLocation[0]
+  let y = clickLocation[1]
+  for(let xAxis=-1;xAxis<=1;xAxis++){
+    for(let yAxis=-1;yAxis<=1;yAxis++){
+      console.log(matrix[x+xAxis][y+yAxis]);
+      //  if(matrix[x+xAxis][y+yAxis].value == 0) {
+      // //   matrix[x+xAxis][y+yAxis] = {
+      // //     ...matrix[x+xAxis,y+yAxis],
+      // //     revealed: true}
 
-// const FindZeroNeighbor = (x,y)=>{
-//   for(let xAxis=-1;xAxis<=1;xAxis++){
-//     for(let yAxis=-1;yAxis<=1;yAxis++){
-//       if(grid[xAxis][yAxis] == 0) continue;
-//     }
-  
-// }
-// }
+      //   }
+        console.log(matrix);
+    }
+  }
+  console.log(matrix);
+}
 
 useEffect(() => {
   if(clickLocation[0] != -1 && clickLocation[1] != -1){
    PlacingBombs(clickLocation)
+   RevealCells()
   }
 }, [clickLocation])
 
