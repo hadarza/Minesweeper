@@ -1,0 +1,5 @@
+.Board-game{
+    @include flex-direction(row);
+    position: relative;
+    top: 5rem;
+}

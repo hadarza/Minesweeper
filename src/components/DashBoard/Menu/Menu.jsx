@@ -1,7 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import {images} from '../../../constants/index'
-
-import { useSelector,useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 const Menu = () => {
     const [Timer, setTimer] = useState(0)
@@ -33,7 +32,6 @@ const Menu = () => {
             </div>
         </div>
        
-
         <div className='logo'>
             <img src={images.logo}/>
         </div>
@@ -43,7 +41,7 @@ const Menu = () => {
                 <p>מס' דגלים</p>
                 <div className='div-img'><img src={images.flag}/></div>
             </div>
-            <div className='reset-section'>
+            <div className='reset-section' onClick={()=>{}}>
                 <p>איפוס</p>
                 <div className='div-img'><img src={images.reset}/></div>
             </div> 

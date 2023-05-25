@@ -1,12 +1,11 @@
 import React from 'react'
-import Cell from '../DashBoard/Cell/Cell'
 import Menu from '../DashBoard/Menu/Menu'
+import Board from '../DashBoard/Board/Board'
 const Game = () => {
   return (
     <div className='game-page'>
         <Menu/>
-        {/* dashboard */}
-        <Cell/>
+        <Board/>
     </div>
   )
 }

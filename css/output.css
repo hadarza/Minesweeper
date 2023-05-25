@@ -18,18 +18,25 @@
 /*align items*/
 /* justify content */
 /*colors*/
+/*instructions button*/
+.instructionsBtn {
+  width: 4rem;
+  height: 3rem;
+  border-radius: 5px;
+}
+
 .game-page {
   display: flex;
-  -webkit-flex-direction: horizontal;
-  -moz-flex-direction: horizontal;
-  -ms-flex-direction: row;
-  -webkit-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  -moz-justify-content: center;
-  justify-content: center;
+  -webkit-flex-direction: vertical;
+  -moz-flex-direction: vertical;
+  -ms-flex-direction: column;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  align-items: center;
   width: 60%;
 }
 
@@ -127,8 +134,8 @@
 }
 
 .cell {
-  width: 2rem;
-  height: 2rem;
+  width: 2.5rem;
+  height: 2.5rem;
   background-color: white;
   margin: 0.2rem;
   border-radius: 3px;
@@ -148,6 +155,17 @@
   -webkit-justify-content: center;
   -moz-justify-content: center;
   justify-content: center;
+}
+
+.Board-game {
+  display: flex;
+  -webkit-flex-direction: horizontal;
+  -moz-flex-direction: horizontal;
+  -ms-flex-direction: row;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  position: relative;
+  top: 5rem;
 }
 
 body, html, p {
