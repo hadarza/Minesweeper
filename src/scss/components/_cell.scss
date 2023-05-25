@@ -7,6 +7,10 @@
     @include flex-direction(row);
     @include align-items(center);
     @include justify-content(center);
+    >img{
+        width:80%;
+        height: 80%;
+    }
 }
 .cell:hover{
     background-color:gainsboro;

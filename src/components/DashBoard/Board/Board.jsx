@@ -1,8 +1,10 @@
 import React, { useState,useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
+import {setGameStart} from '../../../features/DashBoard/DashBoardSlice'
 import Cell from '../Cell/Cell';
 
 const Board = () => {
+  const dispatch = useDispatch()
   const [grid,setGrid]= useState([])
   const game = useSelector((state) => state.dashboard);
   const clickLocation = useSelector((state)=> state.dashboard.ClickLocation);
@@ -16,7 +18,7 @@ const Board = () => {
   // based on difficulty - we decide the size of our matrix
   // for easy 9*9. for medium 12*12. for hard 16*16
 
-  const {size,flagsTotal, bombTotal} = game;
+  const {size,flagsTotal, bombTotal,gameStarted} = game;
   /* initalize the board to size base on difficulty */
   var matrix = [];
   for (var i = 0; i < size; i++) {
@@ -48,6 +50,7 @@ const PlacingBombs = (clickLocation) =>{
      }
   }
   UpdateMatBasedOnBombs()
+  dispatch(setGameStart()) // set game to start
 }
 
 const NotAllowToHaveBomb =(xLocation,yLocation,x,y) =>{
@@ -134,8 +137,10 @@ const isValidIndex = (x,y,xAxis,yAxis)=>{
 
 useEffect(() => {
   if(clickLocation[0] != -1 && clickLocation[1] != -1){
-   PlacingBombs(clickLocation)
-   RevealCells()
+    if(!gameStarted){
+      PlacingBombs(clickLocation) // set matrix
+    }
+    RevealCells()
   }
 }, [clickLocation])
 
