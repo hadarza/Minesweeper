@@ -8,3 +8,7 @@
     @include align-items(center);
     @include justify-content(center);
 }
+.cell:hover{
+    background-color:gainsboro;
+    cursor: pointer;
+}
