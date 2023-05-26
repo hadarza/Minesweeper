@@ -1,4 +1,4 @@
-import React, { useState,useEffect,useReducer } from 'react';
+import React, {useEffect,useReducer } from 'react';
 import { useSelector,useDispatch } from 'react-redux';
 import {setGameStart} from '../../../features/DashBoard/DashBoardSlice'
 import Cell from '../Cell/Cell';
@@ -19,7 +19,7 @@ const Board = () => {
   // for easy 9*9. for medium 12*12. for hard 16*16
   const {size,flagsTotal, bombTotal,gameStarted} = game;
 
-
+  
   /* initalize the board to size base on difficulty */
   const initialMatrix = (() => {
     const matrix = [];
