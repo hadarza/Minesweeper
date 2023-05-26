@@ -17,6 +17,6 @@ p{
     background-color: $blue;
 }
 
-@media screen and (max-width:992px){
-  body{font-size: 8px !important;}
+@media only screen and (max-width:600px){
+  body,html{font-size: 14px !important;}
 }
