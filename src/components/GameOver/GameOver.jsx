@@ -27,7 +27,6 @@ const GameOver = ({matrix,dispatchMatrix}) => {
             <img src={images.bomb}/>
         </div>
         <div>
-
         <div className='Timer'>
             <img src={images.timer}/>
             <p>10</p>
