@@ -1,7 +1,7 @@
 .game-page{
     @include flex-direction(column);
     @include align-items(center);
-    width: 60%;
+    width: 70%;
 }
 .menu{
     width: 100%;
@@ -30,7 +30,14 @@
         p{
             margin: 0;
         }
-        .div-img{
+        .flag-img{
+            width: 1.3rem;
+            height: 1.3rem;
+            >img{
+                width: 100%;
+            }
+        }
+        .reset-img{
             width: 2rem;
             height: 2rem;
             >img{
@@ -38,7 +45,14 @@
             }
         }
 }
-
+.flags-div{
+    height: 2rem;
+    @include flex-direction(row);
+    direction: rtl;
+    >.flag-count{
+        margin-left: .4rem;
+    }
+}
 .difficulty,.Time{
     >p{
         @include flex-direction(row);

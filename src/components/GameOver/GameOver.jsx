@@ -1,6 +1,7 @@
-import React,{useEffect} from 'react'
+import React,{useState,useEffect} from 'react'
 import {images} from '../../constants/index'
 const GameOver = ({matrix,dispatchMatrix}) => {
+    const [showOver,setShowOver] = useState(false) //show game over message after the delay of revealing the bombs
     useEffect(()=>{
         const updatedMatrix = [...matrix]
         let delay = 200;
@@ -19,14 +20,20 @@ const GameOver = ({matrix,dispatchMatrix}) => {
                 }
             }
         }
+        setTimeout(() => {
+            setShowOver(true)
+        }, 1500);
     },[matrix])
   return (
-    <div className='page-gaveover'>
+    <>
+    {showOver &&
+     <div className='page-gaveover'>
     <div className='section-gameover'>
         <div className='bomb'>
             <img src={images.bomb}/>
         </div>
         <div>
+
 
         <div className='Timer'>
             <img src={images.timer}/>
@@ -38,7 +45,9 @@ const GameOver = ({matrix,dispatchMatrix}) => {
             <button className='tryAgain'>אני רוצה לנסות שוב </button>
         </div>
     </div>
-    </div>
+    </div>}
+    </>
+   
   )
 }
 
