@@ -1,0 +1,24 @@
+.page-gaveover{
+    @include flex-direction(column);
+    @include align-items(center);
+    @include justify-content(center);
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+}
+.section-gameover{
+    width: 30rem;
+    background-color: white;
+    height: 15rem;
+    z-index: 2;
+    border-radius: 10px;
+    @include flex-direction(column);
+    @include align-items(center);
+    @include justify-content(center);
+}
+.bomb{
+    width: 5rem;
+    >img{
+        width: 100%;
+    }
+}

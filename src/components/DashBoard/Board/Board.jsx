@@ -1,58 +1,17 @@
-import React, {useEffect,useReducer } from 'react';
+import React, {useEffect } from 'react';
 import { useSelector,useDispatch } from 'react-redux';
 import {setGameStart} from '../../../features/DashBoard/DashBoardSlice'
 import Cell from '../Cell/Cell';
 
-const Board = () => {
+const Board = ({matrix,dispatchMatrix}) => {
   const dispatch = useDispatch()
-  // const [grid,setGrid]= useState([])
   const game = useSelector((state) => state.dashboard);
   const clickLocation = useSelector((state)=> state.dashboard.ClickLocation);
-  // properties of cell
-  const properites = {
-    revealed: false,
-    flagged: false,
-    value: 0
-  }
 
   // based on difficulty - we decide the size of our matrix
   // for easy 9*9. for medium 12*12. for hard 16*16
   const {size,flagsTotal, bombTotal,gameStarted} = game;
 
-  
-  /* initalize the board to size base on difficulty */
-  const initialMatrix = (() => {
-    const matrix = [];
-    for (let i = 0; i < size; i++) {
-      matrix[i] = new Array(size);
-    }
-  
-    // Create empty matrix with properties
-    for (let i = 0; i < size; i++) {
-      for (let j = 0; j < size; j++) {
-        matrix[i][j] = properites; // Replace 'properties' with your desired value
-      }
-    }
-    return matrix;
-  })();
-  
-  function matrixReducer(state, action) {
-    switch (action.type) {
-      case 'SET_MATRIX':
-        return action.matrix;
-      case 'SET_FLAG':
-        const {x,y,flagged} = action.payload;
-        const updatedMatrix = [...state] // get exist matrix
-        updatedMatrix[x][y] ={
-          ...updatedMatrix[x][y],
-          flagged:flagged // set flagged based on action.payload
-        }
-          
-      default:
-        return state;
-    }
-  }
-  const [matrix, dispatchMatrix] = useReducer(matrixReducer, initialMatrix);
 
   const setvalInCell = (x,y,val) =>{
     const updatedMatrix = [...matrix]
