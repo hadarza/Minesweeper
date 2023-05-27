@@ -58,10 +58,7 @@ const Game = () => {
       for (let i = 0; i < size; i++) {
         for (let j = 0; j < size; j++) {
           if(matrix[i][j].value != 'x'){
-            if(matrix[i][j].revealed){
-              console.log("wineer");
-              win = true;
-            }
+            if(matrix[i][j].revealed) win = true;
             else {
               win = false;
               return;
