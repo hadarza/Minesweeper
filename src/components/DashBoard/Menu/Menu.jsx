@@ -5,9 +5,10 @@ import { useSelector } from 'react-redux'
 const Menu = () => {
     const [Timer, setTimer] = useState(0)
     const DashBoard = useSelector((state) => state.dashboard);
-    const {difficulty,flagsInUse,flagsTotal} = DashBoard;
+    const {difficulty,flagsInUse,flagsTotal,gameStarted} = DashBoard;
     // set Timer
     useEffect(() => {
+        if(gameStarted){
         const interval = setInterval(() => {
           setTimer((prevTimer) => prevTimer + 1);
         }, 1000);
@@ -15,7 +16,8 @@ const Menu = () => {
         return () => {
           clearInterval(interval);
         };
-      }, []);
+    }
+      }, [gameStarted]);
     
   return (
     <div className='menu'>

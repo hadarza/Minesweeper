@@ -5,7 +5,7 @@ import { setclickedLocation,setFlagsInUse,setGameOver } from '../../../features/
 const Cell = ({locationX,locationY,matrix,dispatchMatrix}) => {
   const dispatch = useDispatch()  
   const DashBoard = useSelector((state) => state.dashboard);
-  const {flagsInUse,flagsTotal} = DashBoard;
+  const {flagsInUse,flagsTotal,gameStarted} = DashBoard;
   const Ref = useRef()
 
   useEffect(() => {
@@ -24,6 +24,18 @@ const Cell = ({locationX,locationY,matrix,dispatchMatrix}) => {
     dispatch(setclickedLocation(location))
     if(matrix[locationX][locationY].value == 'x'){ // game over
       dispatch(setGameOver(true))
+    }else {
+      // reveal cell
+      if(gameStarted && matrix[locationX][locationY].value != '0'){
+        if(matrix[locationX][locationY].revealed == false){
+          const updatedMatrix = [...matrix]
+          updatedMatrix[locationX][locationY]={
+            ...updatedMatrix[locationX][locationY],
+            revealed: true
+          }
+          dispatchMatrix({type:'SET_MATRIX',matrix:updatedMatrix})
+      }
+      }
     }
   }
 

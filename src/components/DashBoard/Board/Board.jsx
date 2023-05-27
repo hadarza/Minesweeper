@@ -10,7 +10,7 @@ const Board = ({matrix,dispatchMatrix}) => {
 
   // based on difficulty - we decide the size of our matrix
   // for easy 9*9. for medium 12*12. for hard 16*16
-  const {size,flagsTotal, bombTotal,gameStarted} = game;
+  const {size, bombTotal,gameStarted} = game;
 
 
   const setvalInCell = (x,y,val) =>{
