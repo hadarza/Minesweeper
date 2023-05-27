@@ -1,11 +1,14 @@
 import React,{useState,useEffect} from 'react'
 import {images} from '../../../constants/index'
-import { useSelector } from 'react-redux'
-
+import { useDispatch, useSelector } from 'react-redux'
+import {ChangeDifficulty} from '../../../features/DashBoard/DashBoardSlice'
 const Menu = () => {
+    const dispatch = useDispatch()
     const [Timer, setTimer] = useState(0)
     const DashBoard = useSelector((state) => state.dashboard);
-    const {difficulty,flagsInUse,flagsTotal,gameStarted} = DashBoard;
+    const {Properties,level,gameStarted,flagsInUse} = DashBoard;
+    var flagsTotal = Properties[level].flags
+
     // set Timer
     useEffect(() => {
         if(gameStarted){
@@ -19,12 +22,21 @@ const Menu = () => {
     }
       }, [gameStarted]);
     
+    const setLevel = (level) =>{
+        dispatch(ChangeDifficulty(level))
+    }
   return (
     <div className='menu'>
         <div className='time-logo'>
             <div className='difficulty'>
                 <p>קושי</p>
-                <p>{difficulty}</p>
+                <select className="ul-level" onChange={(e)=>{setLevel(e.target.selectedIndex);}} >
+                    {Properties.map((level,key)=>(
+                          <option className="menu-item" key={key}>
+                            {Properties[key].level}
+                      </option>
+                    ))}
+                </select>
             </div>
                 
             <div className='Time'>

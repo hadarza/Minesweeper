@@ -5,7 +5,8 @@ import { setclickedLocation,setFlagsInUse,setGameOver } from '../../../features/
 const Cell = ({locationX,locationY,matrix,dispatchMatrix}) => {
   const dispatch = useDispatch()  
   const DashBoard = useSelector((state) => state.dashboard);
-  const {flagsInUse,flagsTotal,gameStarted} = DashBoard;
+  const {gameStarted,Properties,level,flagsInUse} = DashBoard;
+  let flagsTotal = Properties[level].flags
   const Ref = useRef()
 
   useEffect(() => {
@@ -43,11 +44,13 @@ const Cell = ({locationX,locationY,matrix,dispatchMatrix}) => {
     <div className={`cell cell-${locationX}-${locationY}`} ref={Ref} 
     onContextMenu = {(e)=>{
        e.preventDefault() // prevent default on right click 
-       if(matrix[locationX][locationY].flagged)
-          dispatch(setFlagsInUse(-1)) // remove flag
-        else{ 
-          if(flagsInUse < flagsTotal) // add flag only if you have left
-            dispatch(setFlagsInUse(1)) // add flag
+       if(gameStarted){
+        if(matrix[locationX][locationY].flagged)
+            dispatch(setFlagsInUse(-1)) // remove flag
+          else{ 
+            if(flagsInUse < flagsTotal) // add flag only if you have left
+              dispatch(setFlagsInUse(1)) // add flag
+          }
       }
       dispatchMatrix(
         {type:'SET_FLAG',

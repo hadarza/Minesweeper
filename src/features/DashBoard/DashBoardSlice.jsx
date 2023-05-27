@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 const game = [
-  {level:"easy",size:9,bombs:10,flags:40},
-  {level:"medium",size:12,bombs:15,flags:60},
-  {level:"hard",size:14,bombs:25,flags:80},
+  {level:"easy",size:9,bombs:10,flags:10},
+  {level:"medium",size:12,bombs:40,flags:40},
+  {level:"hard",size:14,bombs:99,flags:99},
 ]
 
 
@@ -10,17 +10,15 @@ export const DashBoardSlice = createSlice({
   name: 'dashboard',
   initialState: {
     gameStarted: false,
-    difficulty: game[0].level,
-    size: game[0].size,
+    Properties: game,
+    level:0,
     ClickLocation: [-1,-1],
-    flagsTotal: game[0].flags,
-    bombTotal: game[0].bombs,
     flagsInUse: 0,
     gameOver: false
   },
   reducers: {
     ChangeDifficulty: (state, action) => {
-      state.difficulty = action.payload
+      state.level = action.payload
     },
     setclickedLocation: (state,action)=>{
       state.ClickLocation = action.payload

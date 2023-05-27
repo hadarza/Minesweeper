@@ -27,9 +27,9 @@ const GameOver = ({matrix,dispatchMatrix}) => {
   return (
     <>
     {showOver &&
-     <div className='page-gaveover'>
+     <div className='msg-section'>
         <div className='section-gameover'>
-            <div className='bomb'>
+            <div className='img-final'>
                 <img src={images.bomb}/>
             </div>
             <button className='playAgain'>אני רוצה לנסות שוב </button>

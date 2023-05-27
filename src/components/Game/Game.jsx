@@ -3,11 +3,13 @@ import Menu from '../DashBoard/Menu/Menu'
 import Board from '../DashBoard/Board/Board'
 import GameOver from '../GameOver/GameOver'
 import { useSelector } from 'react-redux'
+import Winner from '../DashBoard/Winner/Winner'
 
 const Game = () => {
   const game = useSelector((state) => state.dashboard);
   const [winTime,setWinTime] = useState(false);
-  const {size,gameOver} = game;
+  const {gameOver,Properties,level} = game;
+  const size = Properties[level].size
 
     // properties of cell
     const properites = {
@@ -43,7 +45,7 @@ const Game = () => {
             ...updatedMatrix[x][y],
             flagged:flagged // set flagged based on action.payload
           }
-            
+           return updatedMatrix 
         default:
           return state;
       }
@@ -52,13 +54,14 @@ const Game = () => {
     const [matrix, dispatchMatrix] = useReducer(matrixReducer, initialMatrix);
   
     useEffect(() => {
-      console.log(matrix);
       var win = false;
       for (let i = 0; i < size; i++) {
         for (let j = 0; j < size; j++) {
-          if(matrix[i][j].value == ''){
-            if(matrix[i][j].revealed)
+          if(matrix[i][j].value != 'x'){
+            if(matrix[i][j].revealed){
+              console.log("wineer");
               win = true;
+            }
             else {
               win = false;
               return;
@@ -67,14 +70,15 @@ const Game = () => {
         }
       }
       if(win) setWinTime(true)
-      console.log(win)
     }, [matrix])
+    
+
     return (
     <div className='game-page'>
         <Menu/>
         <Board matrix={matrix} dispatchMatrix={dispatchMatrix}/>
         {gameOver && <GameOver matrix={matrix} dispatchMatrix={dispatchMatrix}/>}
-        {winTime && <p>winner!!</p>}
+        {winTime && <Winner/>}
     </div>
   )
 }
