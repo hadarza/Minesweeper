@@ -1,19 +1,18 @@
-import React,{useState,useEffect} from 'react'
+import React,{useEffect} from 'react'
 import {images} from '../../../constants/index'
 import { useDispatch, useSelector } from 'react-redux'
-import {ChangeDifficulty} from '../../../features/DashBoard/DashBoardSlice'
+import {ChangeDifficulty,ResetGame,setTimer} from '../../../features/DashBoard/DashBoardSlice'
 const Menu = () => {
     const dispatch = useDispatch()
-    const [Timer, setTimer] = useState(0)
     const DashBoard = useSelector((state) => state.dashboard);
-    const {Properties,level,gameStarted,flagsInUse} = DashBoard;
+    const {Properties,level,gameStarted,flagsInUse,timer} = DashBoard;
     var flagsTotal = Properties[level].flags
 
     // set Timer
     useEffect(() => {
         if(gameStarted){
         const interval = setInterval(() => {
-          setTimer((prevTimer) => prevTimer + 1);
+            dispatch(setTimer())
         }, 1000);
     
         return () => {
@@ -41,7 +40,7 @@ const Menu = () => {
                 
             <div className='Time'>
                 <p>טיימר</p>
-                <p>{Timer}</p>
+                <p>{timer}</p>
             </div>
         </div>
        
@@ -58,7 +57,7 @@ const Menu = () => {
                 </div>
 
             </div>
-            <div className='reset-section' onClick={()=>{}}>
+            <div className='reset-section' onClick={()=>{dispatch(ResetGame())}}>
                 <p>איפוס</p>
                 <div className='reset-img'><img src={images.reset}/></div>
             </div> 

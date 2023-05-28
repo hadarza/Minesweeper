@@ -45,6 +45,9 @@
             }
         }
 }
+.reset-section{
+    cursor: pointer;
+}
 .flags-div{
     height: 2rem;
     @include flex-direction(row);

@@ -3,7 +3,7 @@ import Menu from '../DashBoard/Menu/Menu'
 import Board from '../DashBoard/Board/Board'
 import GameOver from '../GameOver/GameOver'
 import { useSelector } from 'react-redux'
-import Winner from '../DashBoard/Winner/Winner'
+import Winner from '../Winner/Winner'
 
 const Game = () => {
   const game = useSelector((state) => state.dashboard);

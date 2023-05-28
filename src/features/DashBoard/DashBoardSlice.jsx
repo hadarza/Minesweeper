@@ -9,6 +9,7 @@ const game = [
 export const DashBoardSlice = createSlice({
   name: 'dashboard',
   initialState: {
+    timer:0,
     gameStarted: false,
     Properties: game,
     level:0,
@@ -17,6 +18,12 @@ export const DashBoardSlice = createSlice({
     gameOver: false
   },
   reducers: {
+    setTimer:(state)=>{
+      state.timer +=1
+    },
+    resetTimer:(state)=>{
+      state.timer =0
+    },
     ChangeDifficulty: (state, action) => {
       state.level = action.payload
     },
@@ -31,10 +38,25 @@ export const DashBoardSlice = createSlice({
     },
     setGameOver :(state,action)=>{
       state.gameOver = action.payload
+    },
+    ResetGame:(state)=>{
+      state.flagsInUse = 0;
+      state.gameOver = false;
+      state.gameStarted = false;
+      state.ClickLocation = [-1,-1]
+      state.timer = 0 
     }
   }
 })
-export const {ChangeDifficulty,setclickedLocation,setFlagsInUse,setGameStart,setGameOver } = DashBoardSlice.actions
+export const {
+            ChangeDifficulty,
+            setclickedLocation,
+            setFlagsInUse,
+            setGameStart,
+            setGameOver,
+            ResetGame,
+            setTimer,
+            resetTimer } = DashBoardSlice.actions
 
 export default DashBoardSlice.reducer
 
