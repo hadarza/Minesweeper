@@ -5,21 +5,25 @@ import {ChangeDifficulty,ResetGame,setTimer} from '../../../features/DashBoard/D
 const Menu = () => {
     const dispatch = useDispatch()
     const DashBoard = useSelector((state) => state.dashboard);
-    const {Properties,level,gameStarted,flagsInUse,timer} = DashBoard;
+    const {Properties,level,gameStarted,flagsInUse,timer,gameOver} = DashBoard;
     var flagsTotal = Properties[level].flags
 
     // set Timer
     useEffect(() => {
         if(gameStarted){
-        const interval = setInterval(() => {
+        var interval = setInterval(() => {
             dispatch(setTimer())
         }, 1000);
-    
+
+        if(gameOver) clearInterval(interval)
+
         return () => {
           clearInterval(interval);
         };
-    }
-      }, [gameStarted]);
+
+        }
+        
+      }, [gameStarted,gameOver]);
     
     const setLevel = (level) =>{
         dispatch(ChangeDifficulty(level))

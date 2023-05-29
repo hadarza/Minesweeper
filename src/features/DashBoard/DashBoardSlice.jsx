@@ -35,13 +35,13 @@ export const DashBoardSlice = createSlice({
     },
     setGameStart : (state)=>{
       state.gameStarted = true;
+      state.gameOver = false;
     },
     setGameOver :(state,action)=>{
       state.gameOver = action.payload
     },
     ResetGame:(state)=>{
       state.flagsInUse = 0;
-      state.gameOver = false;
       state.gameStarted = false;
       state.ClickLocation = [-1,-1]
       state.timer = 0 
@@ -49,6 +49,7 @@ export const DashBoardSlice = createSlice({
   }
 })
 export const {
+  
             ChangeDifficulty,
             setclickedLocation,
             setFlagsInUse,

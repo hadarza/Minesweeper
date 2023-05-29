@@ -1,20 +1,31 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import {images} from '../../constants/index'
 import { useDispatch } from 'react-redux'
-import {ResetGame} from '../../features/DashBoard/DashBoardSlice'
+import { resetTimer } from '../../features/DashBoard/DashBoardSlice'
 
-const Winner = () => {
+const Winner = ({playAgain}) => {
+  const [showWinner,setshowWinner] = useState(true) //show game over message after the delay of revealing the bombs
+
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(resetTimer())
+  }, [])
+  
   return (
+    <>{showWinner &&
     <div className='msg-section'>
       <div className='section-winner'>
         <div className='img-final'>
           <img src={images.winner}/>
         </div>
-        <button className='playAgain' onClick={()=>{dispatch(ResetGame())}}>תראה לכולם כמה טוב את/ה שוב!</button>
+        <button className='playAgain' onClick={()=>{
+          playAgain()
+          setshowWinner(false)
+        }}>תראה לכולם כמה טוב את/ה שוב!</button>
       </div>
       </div>
-
+      }</>
     )
 }
 

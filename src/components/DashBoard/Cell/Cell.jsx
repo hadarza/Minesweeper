@@ -15,7 +15,12 @@ const Cell = ({locationX,locationY,matrix,dispatchMatrix}) => {
       if(matrix[locationX][locationY].revealed){
         Ref.current.classList.remove(`cell-${locationX}-${locationY}`)
         Ref.current.classList.add(`cellActive-${locationX}-${locationY}`)
+      }else{
+       Ref.current.classList.remove(`cellActive-${locationX}-${locationY}`)
+       Ref.current.classList.add(`cell-${locationX}-${locationY}`)
+
       }
+
     }
   }, [matrix])
   

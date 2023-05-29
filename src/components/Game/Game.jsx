@@ -2,10 +2,12 @@ import React,{useReducer, useState,useEffect} from 'react'
 import Menu from '../DashBoard/Menu/Menu'
 import Board from '../DashBoard/Board/Board'
 import GameOver from '../GameOver/GameOver'
-import { useSelector } from 'react-redux'
+import { useSelector,useDispatch } from 'react-redux'
 import Winner from '../Winner/Winner'
+import {ResetGame} from '../../features/DashBoard/DashBoardSlice'
 
 const Game = () => {
+  const dispatch = useDispatch()
   const game = useSelector((state) => state.dashboard);
   const [winTime,setWinTime] = useState(false);
   const {gameOver,Properties,level} = game;
@@ -34,7 +36,7 @@ const Game = () => {
       return matrix;
     })();
     
-    function matrixReducer(state, action) {
+    function matrixReducer(state = initialMatrix, action) {
       switch (action.type) {
         case 'SET_MATRIX':
           return action.matrix;
@@ -46,6 +48,8 @@ const Game = () => {
             flagged:flagged // set flagged based on action.payload
           }
            return updatedMatrix 
+          case 'INITIAL_STATE':
+            return initialMatrix
         default:
           return state;
       }
@@ -69,13 +73,18 @@ const Game = () => {
       if(win) setWinTime(true)
     }, [matrix])
     
-
+  
+    const playAgain = ()=>{
+      dispatch(ResetGame())
+      dispatchMatrix({type:'INITIAL_STATE'})
+      console.log(matrix);
+  }
     return (
     <div className='game-page'>
         <Menu/>
         <Board matrix={matrix} dispatchMatrix={dispatchMatrix}/>
-        {gameOver && <GameOver matrix={matrix} dispatchMatrix={dispatchMatrix}/>}
-        {winTime && <Winner/>}
+        {gameOver && <GameOver matrix={matrix} dispatchMatrix={dispatchMatrix} playAgain={playAgain}/>}
+        {winTime && <Winner playAgain={playAgain}/>}
     </div>
   )
 }
