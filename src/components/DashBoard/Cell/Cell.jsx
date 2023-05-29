@@ -56,7 +56,7 @@ const Cell = ({locationX,locationY,matrix,dispatchMatrix}) => {
             if(flagsInUse < flagsTotal) // add flag only if you have left
               dispatch(setFlagsInUse(1)) // add flag
           }
-      }
+      
       dispatchMatrix(
         {type:'SET_FLAG',
         payload: {
@@ -65,6 +65,7 @@ const Cell = ({locationX,locationY,matrix,dispatchMatrix}) => {
           flagged:!matrix[locationX][locationY].flagged
         }})
     }}
+  }
     onClick={setHole}>
     {matrix.length > 0 &&  matrix[locationX][locationY].revealed ? ((matrix[locationX][locationY].value  != 0 ) ? matrix[locationX][locationY].value :'') 
     : (matrix.length > 0 && matrix[locationX][locationY].flagged)? <img src={images.flag}/> : ''
