@@ -1,16 +1,16 @@
 import React, {useEffect } from 'react';
 import { useSelector,useDispatch } from 'react-redux';
-import {setGameStart} from '../../../features/DashBoard/DashBoardSlice'
+import {setGameStart,setFlagsInUse} from '../../../features/DashBoard/DashBoardSlice'
 import Cell from '../Cell/Cell';
 
 const Board = ({matrix,dispatchMatrix}) => {
   const dispatch = useDispatch()
   const game = useSelector((state) => state.dashboard);
   const clickLocation = useSelector((state)=> state.dashboard.ClickLocation);
-
+  var countReveal = 0;
   // based on difficulty - we decide the size of our matrix
   // for easy 9*9. for medium 12*12. for hard 16*16
-  const {Properties,level,gameStarted} = game;
+  const {Properties,level,gameStarted,flagsInUse} = game;
   let bombTotal = Properties[level].bombs
   let size = Properties[level].size
 
@@ -26,6 +26,16 @@ const Board = ({matrix,dispatchMatrix}) => {
     matrix[x][y]={
      ...matrix[x][y],
      revealed: true
+   }
+   if (matrix[x][y].flagged){ // flag will disapear - so inc num of flags in one
+    var updatedMatrix = [...matrix]
+    updatedMatrix[x][y]={
+      ...updatedMatrix[x][y],
+      flagged: false
+    }
+    dispatchMatrix({type:'SET_MATRIX',matrix:updatedMatrix})
+      dispatch(setFlagsInUse(-1))
+      console.log("flagged");
    }
   }
 /* placing bombs on the board */
@@ -111,6 +121,7 @@ const RevealCells = (x, y) => {
       }
     }
   }
+
    // reveal his neighbors - create for us a border of cells around the 0's cells
     FindBorderNeighbor(x,y);
 }

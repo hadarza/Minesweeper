@@ -71,13 +71,14 @@ const Game = () => {
         }
       }
       if(win) setWinTime(true)
+      console.log(matrix);
+
     }, [matrix])
     
   
     const playAgain = ()=>{
       dispatch(ResetGame())
       dispatchMatrix({type:'INITIAL_STATE'})
-      console.log(matrix);
   }
     return (
     <div className='game-page'>

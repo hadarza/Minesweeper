@@ -31,7 +31,7 @@ export const DashBoardSlice = createSlice({
       state.ClickLocation = action.payload
     },
     setFlagsInUse : (state,action)=>{
-      state.flagsInUse +=action.payload; // action.playload = 1/-1 (add flag/ remove flag)
+      state.flagsInUse += action.payload; // action.playload = 1/-1 (add flag/ remove flag)
     },
     setGameStart : (state)=>{
       state.gameStarted = true;

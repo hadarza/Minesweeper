@@ -27,19 +27,21 @@ const Cell = ({locationX,locationY,matrix,dispatchMatrix}) => {
   // at click - if it is a bomb - game over. else, reveal this cell
   const setHole = ()=>{
     let location = [locationX,locationY]
-    dispatch(setclickedLocation(location))
-    if(matrix[locationX][locationY].value == 'x'){ // game over
-      dispatch(setGameOver(true))
-    }else {
-      // reveal cell
-      if(gameStarted && matrix[locationX][locationY].value != '0'){
-        if(matrix[locationX][locationY].revealed == false){
-          const updatedMatrix = [...matrix]
-          updatedMatrix[locationX][locationY]={
-            ...updatedMatrix[locationX][locationY],
-            revealed: true
+    if(!matrix[locationX][locationY].flagged){ // don't allow user to click if there is a flag on the cell
+      dispatch(setclickedLocation(location))
+      if(matrix[locationX][locationY].value == 'x'){ // game over
+        dispatch(setGameOver(true))
+      }else {
+        // reveal cell
+        if(gameStarted && matrix[locationX][locationY].value != '0'){
+          if(matrix[locationX][locationY].revealed == false){
+            const updatedMatrix = [...matrix]
+            updatedMatrix[locationX][locationY]={
+              ...updatedMatrix[locationX][locationY],
+              revealed: true
+            }
+            dispatchMatrix({type:'SET_MATRIX',matrix:updatedMatrix})
           }
-          dispatchMatrix({type:'SET_MATRIX',matrix:updatedMatrix})
         }
       }
     }
@@ -48,7 +50,6 @@ const Cell = ({locationX,locationY,matrix,dispatchMatrix}) => {
 
 
   const setColors = ()=>{
-    console.log(Ref.current.style);
     switch(Ref.current.textContent){
       case "1":
         Ref.current.style.color = "red"
