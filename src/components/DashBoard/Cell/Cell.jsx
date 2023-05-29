@@ -10,6 +10,8 @@ const Cell = ({locationX,locationY,matrix,dispatchMatrix}) => {
   const Ref = useRef()
 
   useEffect(() => {
+    setColors()
+
     if(matrix.length > 0){
       // change style of cell at revealing cells
       if(matrix[locationX][locationY].revealed){
@@ -18,13 +20,11 @@ const Cell = ({locationX,locationY,matrix,dispatchMatrix}) => {
       }else{
        Ref.current.classList.remove(`cellActive-${locationX}-${locationY}`)
        Ref.current.classList.add(`cell-${locationX}-${locationY}`)
-
       }
-
     }
   }, [matrix])
   
-  
+  // at click - if it is a bomb - game over. else, reveal this cell
   const setHole = ()=>{
     let location = [locationX,locationY]
     dispatch(setclickedLocation(location))
@@ -40,8 +40,36 @@ const Cell = ({locationX,locationY,matrix,dispatchMatrix}) => {
             revealed: true
           }
           dispatchMatrix({type:'SET_MATRIX',matrix:updatedMatrix})
+        }
       }
-      }
+    }
+  }
+
+
+
+  const setColors = ()=>{
+    console.log(Ref.current.style);
+    switch(Ref.current.textContent){
+      case "1":
+        Ref.current.style.color = "red"
+        break;
+      case "2":
+        Ref.current.style.color = "purple"
+        break;
+      case "3":
+        Ref.current.style.color = "brown"
+        break;
+      case "4":
+        Ref.current.style.color = "orange"
+        break;
+      case "5":
+        Ref.current.style.color = "blue"
+        break;
+      default:
+        Ref.current.style.color = "pink"
+        break;
+
+
     }
   }
 
