@@ -1,9 +1,11 @@
 import React,{useReducer, useState,useEffect} from 'react'
+import { useSelector } from 'react-redux'
+
 import Menu from '../DashBoard/Menu/Menu'
 import Board from '../DashBoard/Board/Board'
-import GameOver from '../GameOver/GameOver'
-import { useSelector } from 'react-redux'
-import Winner from '../Winner/Winner'
+import MsgUser from '../MsgUser/MsgUser'
+
+import {images} from '../../constants/index'
 
 const Game = () => {
   const game = useSelector((state) => state.dashboard);
@@ -68,14 +70,27 @@ const Game = () => {
         }
       }
       if(win) setWinTime(true)
+      console.log(matrix)
     }, [matrix])
     
     return (
     <div className='game-page'>
         <Menu initialMatrix={initialMatrix} dispatchMatrix={dispatchMatrix}/>
         <Board matrix={matrix} dispatchMatrix={dispatchMatrix}/>
-        {gameOver && <GameOver matrix={matrix} dispatchMatrix={dispatchMatrix} initialMatrix={initialMatrix}/>}
-        {winTime && <Winner />}
+        {gameOver && <MsgUser 
+        initialMatrix={initialMatrix}
+         dispatchMatrix={dispatchMatrix} 
+         title="אני רוצה לנסות שוב"
+         img={images.bomb}
+         altImg="Bomb"/>}
+
+        {winTime && <MsgUser 
+        initialMatrix={initialMatrix}
+         dispatchMatrix={dispatchMatrix} 
+         title="תרא/ה לכולם כמה טוב אתה!"
+         img={images.winner}
+         altImg="winner"/>}
+
     </div>
   )
 }

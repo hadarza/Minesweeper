@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSelector,useDispatch } from 'react-redux';
 
-import { images } from '../../constants/index';
 import { ResetGame, setGameOver } from '../../features/DashBoard/DashBoardSlice';
 
-const GameOver = ({ initialMatrix , dispatchMatrix}) => {
+const MsgUser = ({ initialMatrix , dispatchMatrix,title,img,altImg}) => {
   const {gameOver} = useSelector((state)=>state.dashboard)
-    const [showOver, setShowOver] = useState(true); // show game over message after the delay of revealing the bombs
+    const [showGameOverMsg, setshowGameOverMsg] = useState(true); // show game over message after the delay of revealing the bombs
   const dispatch = useDispatch();
   const gameOverRef = useRef(false); // useRef to track game over status
   const cells = document.querySelectorAll('.cell');
@@ -26,7 +25,8 @@ const GameOver = ({ initialMatrix , dispatchMatrix}) => {
     gameOverRef.current = true; // Set the game over status
     dispatch(setGameOver(false));
     dispatchMatrix({ type: 'SET_MATRIX', matrix: initialMatrix });
-  }
+    setshowGameOverMsg(!showGameOverMsg)
+}
 
   useEffect(() => {
         // enable to click on board only after gaveOver set to true
@@ -39,20 +39,20 @@ const GameOver = ({ initialMatrix , dispatchMatrix}) => {
 
   return (
     <>
-      {showOver && (
+      {showGameOverMsg && (
         <div className="msg-section">
-          <div className="section-gameover">
+          <div className="section-msg">
             <div className="img-final">
-              <img src={images.bomb} alt="Bomb" />
+              <img src={img} alt={altImg} />
             </div>
             <button className="playAgain" onClick={playAgain}>
-              אני רוצה לנסות שוב
+                {title}
             </button>
           </div>
-        </div>
-      )}
+        </div>)
+    }
     </>
   );
 };
 
-export default GameOver;
+export default MsgUser;

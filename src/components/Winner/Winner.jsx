@@ -1,59 +1,73 @@
-import React,{useState,useEffect} from 'react'
-import {images} from '../../constants/index'
-import { useDispatch } from 'react-redux'
-import { resetTimer } from '../../features/DashBoard/DashBoardSlice'
+// import React,{useState,useEffect,useRef} from 'react'
+// import {images} from '../../constants/index'
+// import { useDispatch } from 'react-redux'
+// import { resetTimer } from '../../features/DashBoard/DashBoardSlice'
 
-const Winner = () => {
-  const [showWinner,setshowWinner] = useState(true) //show game over message after the delay of revealing the bombs
-  const cells = document.querySelectorAll('.cell');
-  const dispatch = useDispatch()
+// const Winner = ({initialMatrix,dispatchMatrix}) => {
+//   const [showWinner,setshowWinner] = useState(true) //show game over message after the delay of revealing the bombs
+//   const cells = document.querySelectorAll('.cell');
+//   const dispatch = useDispatch()
+//   const gameOverRef = useRef(false); // useRef to track game over status
 
-  useEffect(() => {
-    dispatch(resetTimer())
-      // disable to click on board
-      cells.forEach((button) => {
-        button.style.pointerEvents = 'none';
-      });
+//   useEffect(() => {
+//     dispatch(resetTimer())
+//       // disable to click on board
+//       cells.forEach((cell) => {
+//         cell.style.pointerEvents = 'none';
+//       });
 
-  }, []);
+//   }, []);
 
-  const playAgain = () => {
-    // if (gameOverRef.current) {
-    //   return; // Return early if the game is already restarted
-    // }
+//   // const playAgain = () => {
+//   //   if (gameOverRef.current) {
+//   //     return; // Return early if the game is already restarted
+//   //   }
+//   //   gameOverRef.current = true; // Set the game over status
+//   //   setshowWinner(false)
+//   //   dispatchMatrix({ type: 'SET_MATRIX', matrix: initialMatrix });
+//   // }
 
-    // gameOverRef.current = true; // Set the game over status
+// //   useEffect(() => {
+// //     // // enable to click on board only after gaveOver set to true
+// //     // if(gameOver){
+// //     // cells.forEach((cell) => {
+// //     //     cell.style.pointerEvents = 'auto';
+// //     // }); 
+// //     }
+// // }, [gameOver])
 
-    // dispatch(ResetGame());
-    // dispatch(setGameOver(false));
+//     // if (gameOverRef.current) {
+//     //   return; // Return early if the game is already restarted
+//     // }
 
-    // setTimeout(() => {
-    //   dispatchMatrix({ type: 'SET_MATRIX', matrix: initialMatrix });
+//     // gameOverRef.current = true; // Set the game over status
 
-    // // enable to click on board
-    //   cells.forEach((button) => {
-    //     button.style.pointerEvents = 'auto';
-    //   });
+//     // dispatch(ResetGame());
+//     // dispatch(setGameOver(false));
 
-    //   gameOverRef.current = false; // Reset the game over status
-    // }, 500); 
-  };
+//     // setTimeout(() => {
+//     //   dispatchMatrix({ type: 'SET_MATRIX', matrix: initialMatrix });
 
-  return (
-    <>{showWinner &&
-    <div className='msg-section'>
-      <div className='section-winner'>
-        <div className='img-final'>
-          <img src={images.winner}/>
-        </div>
-        <button className='playAgain' onClick={()=>{
-          // playAgain()
-          setshowWinner(false)
-        }}>תראה לכולם כמה טוב את/ה שוב!</button>
-      </div>
-      </div>
-      }</>
-    )
-}
+//     // // enable to click on board
+//     //   cells.forEach((button) => {
+//     //     button.style.pointerEvents = 'auto';
+//     //   });
 
-export default Winner
+//     //   gameOverRef.current = false; // Reset the game over status
+//     // }, 500); 
+
+//   return (
+//     <>{showWinner &&
+//     <div className='msg-section'>
+//       <div className='section-winner'>
+//         <div className='img-final'>
+//           <img src={images.winner}/>
+//         </div>
+//         <button className='playAgain' onClick={()=>{}}>תראה לכולם כמה טוב את/ה שוב!</button>
+//       </div>
+//       </div>
+//       }</>
+//     )
+// }
+
+// export default Winner

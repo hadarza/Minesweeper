@@ -1,24 +1,26 @@
 import React,{useEffect,useRef} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+
 import {images} from '../../../constants/index'
 import { setclickedLocation,setFlagsInUse,setGameOver } from '../../../features/DashBoard/DashBoardSlice'
+
 const Cell = ({locationX,locationY,matrix,dispatchMatrix}) => {
   const dispatch = useDispatch()  
   const DashBoard = useSelector((state) => state.dashboard);
   const {gameStarted,Properties,level,flagsInUse,gameOver} = DashBoard;
   let flagsTotal = Properties[level].flags
-  const Ref = useRef()
+  const cellRef = useRef()
 
   useEffect(() => {
     setColors()
     if(matrix.length > 0){
       // change style of cell at revealing cells
       if(matrix[locationX][locationY].revealed){
-        Ref.current.classList.remove(`cell-${locationX}-${locationY}`)
-        Ref.current.classList.add(`cellActive-${locationX}-${locationY}`)
+        cellRef.current.classList.remove(`cell-${locationX}-${locationY}`)
+        cellRef.current.classList.add(`cellActive-${locationX}-${locationY}`)
       }else{
-       Ref.current.classList.remove(`cellActive-${locationX}-${locationY}`)
-       Ref.current.classList.add(`cell-${locationX}-${locationY}`)
+        cellRef.current.classList.remove(`cellActive-${locationX}-${locationY}`)
+        cellRef.current.classList.add(`cell-${locationX}-${locationY}`)
       }
     }
   }, [matrix])
@@ -47,59 +49,66 @@ const Cell = ({locationX,locationY,matrix,dispatchMatrix}) => {
       }
     }
   }
-
-
-
+  // set font colors to cells on board
   const setColors = ()=>{
-    switch(Ref.current.textContent){
+    switch(cellRef.current.textContent){
       case "1":
-        Ref.current.style.color = "red"
+        cellRef.current.style.color = "red"
         break;
       case "2":
-        Ref.current.style.color = "purple"
+        cellRef.current.style.color = "purple"
         break;
       case "3":
-        Ref.current.style.color = "brown"
+        cellRef.current.style.color = "brown"
         break;
       case "4":
-        Ref.current.style.color = "orange"
+        cellRef.current.style.color = "orange"
         break;
       case "5":
-        Ref.current.style.color = "blue"
+        cellRef.current.style.color = "blue"
         break;
       case "6":
-        Ref.current.style.color = "green"
+        cellRef.current.style.color = "green"
         break;
       case "7":
-        Ref.current.style.color = "cyan"
+        cellRef.current.style.color = "cyan"
         break;
       default:
-        Ref.current.style.color = "pink"
+        cellRef.current.style.color = "pink"
         break;
     }
   }
 
-  return (
-    <div className={`cell cell-${locationX}-${locationY}`} ref={Ref} 
-    onContextMenu = {(e)=>{
-       e.preventDefault() // prevent default on right click 
-       if(gameStarted){
-        if(matrix[locationX][locationY].flagged)
-            dispatch(setFlagsInUse(-1)) // remove flag
-          else{ 
-            if(flagsInUse < flagsTotal) // add flag only if you have left
-              dispatch(setFlagsInUse(1)) // add flag
-          }
-      
-      dispatchMatrix({
-        type:'SET_FLAG',
-        payload: {
-          x: locationX,
-          y : locationY,
-          flagged:!matrix[locationX][locationY].flagged
-        }})
-    }}
+  const cell = matrix[locationX][locationY];
+const flagged = cell.flagged;
+
+const handleContextMenu = (e) => {
+  e.preventDefault(); // prevent default on right click
+
+  if (gameStarted) {
+    if (flagged) {
+      dispatch(setFlagsInUse(-1)); // remove flag
+    } else {
+      if (flagsInUse < flagsTotal) {
+        dispatch(setFlagsInUse(1)); // add flag
+      }
+    }
+
+    dispatchMatrix({
+      type: 'SET_FLAG',
+      payload: {
+        x: locationX,
+        y: locationY,
+        flagged: !flagged
+      }
+    });
   }
+};
+
+
+  return (
+    <div className={`cell cell-${locationX}-${locationY}`} ref={cellRef} 
+    onContextMenu = {handleContextMenu}
     onClick={setHole}>
     {matrix.length > 0 &&  matrix[locationX][locationY].revealed ? ((matrix[locationX][locationY].value  != 0 ) ? matrix[locationX][locationY].value :'') 
     : (matrix.length > 0 && matrix[locationX][locationY].flagged)? <img src={images.flag}/> : ''
