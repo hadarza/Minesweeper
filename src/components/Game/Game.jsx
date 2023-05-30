@@ -45,7 +45,7 @@ const Game = () => {
             ...updatedMatrix[x][y],
             flagged:flagged // set flagged based on action.payload
           }
-           return updatedMatrix 
+          return updatedMatrix 
         default:
           return state;
       }
@@ -57,6 +57,7 @@ const Game = () => {
       var win = false;
       for (let i = 0; i < size; i++) {
         for (let j = 0; j < size; j++) {
+          // if all cells that aren't x - are revealed so user win!
           if(matrix[i][j].value != 'x'){
             if(matrix[i][j].revealed) win = true;
             else {
@@ -67,11 +68,8 @@ const Game = () => {
         }
       }
       if(win) setWinTime(true)
-
     }, [matrix])
     
-
-
     return (
     <div className='game-page'>
         <Menu initialMatrix={initialMatrix} dispatchMatrix={dispatchMatrix}/>

@@ -14,7 +14,30 @@ const Winner = () => {
       cells.forEach((button) => {
         button.style.pointerEvents = 'none';
       });
+
   }, []);
+
+  const playAgain = () => {
+    // if (gameOverRef.current) {
+    //   return; // Return early if the game is already restarted
+    // }
+
+    // gameOverRef.current = true; // Set the game over status
+
+    // dispatch(ResetGame());
+    // dispatch(setGameOver(false));
+
+    // setTimeout(() => {
+    //   dispatchMatrix({ type: 'SET_MATRIX', matrix: initialMatrix });
+
+    // // enable to click on board
+    //   cells.forEach((button) => {
+    //     button.style.pointerEvents = 'auto';
+    //   });
+
+    //   gameOverRef.current = false; // Reset the game over status
+    // }, 500); 
+  };
 
   return (
     <>{showWinner &&

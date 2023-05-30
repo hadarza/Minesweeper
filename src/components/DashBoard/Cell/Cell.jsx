@@ -11,7 +11,6 @@ const Cell = ({locationX,locationY,matrix,dispatchMatrix}) => {
 
   useEffect(() => {
     setColors()
-
     if(matrix.length > 0){
       // change style of cell at revealing cells
       if(matrix[locationX][locationY].revealed){
@@ -26,7 +25,6 @@ const Cell = ({locationX,locationY,matrix,dispatchMatrix}) => {
   
   // at click - if it is a bomb - game over. else, reveal this cell
   const setHole = ()=>{
-    console.log("clicking")
     if(!gameOver){
       let location = [locationX,locationY]
       if(!matrix[locationX][locationY].flagged){ // don't allow user to click if there is a flag on the cell
@@ -69,6 +67,12 @@ const Cell = ({locationX,locationY,matrix,dispatchMatrix}) => {
       case "5":
         Ref.current.style.color = "blue"
         break;
+      case "6":
+        Ref.current.style.color = "green"
+        break;
+      case "7":
+        Ref.current.style.color = "cyan"
+        break;
       default:
         Ref.current.style.color = "pink"
         break;
@@ -87,8 +91,8 @@ const Cell = ({locationX,locationY,matrix,dispatchMatrix}) => {
               dispatch(setFlagsInUse(1)) // add flag
           }
       
-      dispatchMatrix(
-        {type:'SET_FLAG',
+      dispatchMatrix({
+        type:'SET_FLAG',
         payload: {
           x: locationX,
           y : locationY,
