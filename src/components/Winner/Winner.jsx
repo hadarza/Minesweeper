@@ -5,13 +5,17 @@ import { resetTimer } from '../../features/DashBoard/DashBoardSlice'
 
 const Winner = () => {
   const [showWinner,setshowWinner] = useState(true) //show game over message after the delay of revealing the bombs
-
+  const cells = document.querySelectorAll('.cell');
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(resetTimer())
-  }, [])
-  
+      // disable to click on board
+      cells.forEach((button) => {
+        button.style.pointerEvents = 'none';
+      });
+  }, []);
+
   return (
     <>{showWinner &&
     <div className='msg-section'>

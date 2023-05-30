@@ -7,6 +7,7 @@ const GameOver = ({ matrix, dispatchMatrix, initialMatrix }) => {
   const [showOver, setShowOver] = useState(true); // show game over message after the delay of revealing the bombs
   const dispatch = useDispatch();
   const gameOverRef = useRef(false); // useRef to track game over status
+  const cells = document.querySelectorAll('.cell');
 
   useEffect(() => {
     const updatedMatrix = [...matrix];
@@ -29,18 +30,18 @@ const GameOver = ({ matrix, dispatchMatrix, initialMatrix }) => {
       }
     }, 100);
 
-    const buttons = document.querySelectorAll('.cell');
-    buttons.forEach((button) => {
+    // disable to click on board
+    cells.forEach((button) => {
       button.style.pointerEvents = 'none';
     });
   }, []);
 
   const playAgain = () => {
-    if (gameOverRef.current) {
-      return; // Return early if the game is already restarted
-    }
+    // if (gameOverRef.current) {
+    //   return; // Return early if the game is already restarted
+    // }
 
-    gameOverRef.current = true; // Set the game over status
+    // gameOverRef.current = true; // Set the game over status
 
     dispatch(ResetGame());
     dispatch(setGameOver(false));
@@ -48,18 +49,16 @@ const GameOver = ({ matrix, dispatchMatrix, initialMatrix }) => {
     setTimeout(() => {
       dispatchMatrix({ type: 'SET_MATRIX', matrix: initialMatrix });
 
-      const buttons = document.querySelectorAll('.cell');
-      buttons.forEach((button) => {
+    // enable to click on board
+      cells.forEach((button) => {
         button.style.pointerEvents = 'auto';
       });
 
-      gameOverRef.current = false; // Reset the game over status
-    }, 500); // Adjust the delay to your preferred duration (in milliseconds)
-  };
+    //   gameOverRef.current = false; // Reset the game over status
+     }, 500); 
+  }
 
-  useEffect(() => {
-    dispatchMatrix({ type: 'SET_MATRIX', matrix: initialMatrix });
-  }, [showOver]);
+
 
   return (
     <>

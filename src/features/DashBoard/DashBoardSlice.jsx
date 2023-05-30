@@ -50,15 +50,14 @@ export const DashBoardSlice = createSlice({
   }
 })
 export const {
-  
-            ChangeDifficulty,
-            setclickedLocation,
-            setFlagsInUse,
-            setGameStart,
-            setGameOver,
-            ResetGame,
-            setTimer,
-            resetTimer } = DashBoardSlice.actions
+              ChangeDifficulty,
+              setclickedLocation,
+              setFlagsInUse,
+              setGameStart,
+              setGameOver,
+              ResetGame,
+              setTimer,
+              resetTimer } = DashBoardSlice.actions
 
 export default DashBoardSlice.reducer
 

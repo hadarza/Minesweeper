@@ -2,7 +2,7 @@ import React,{useEffect} from 'react'
 import {images} from '../../../constants/index'
 import { useDispatch, useSelector } from 'react-redux'
 import {ChangeDifficulty,ResetGame,setTimer} from '../../../features/DashBoard/DashBoardSlice'
-const Menu = () => {
+const Menu = ({initialMatrix,dispatchMatrix}) => {
     const dispatch = useDispatch()
     const DashBoard = useSelector((state) => state.dashboard);
     const {Properties,level,gameStarted,flagsInUse,timer,gameOver} = DashBoard;
@@ -26,8 +26,20 @@ const Menu = () => {
       }, [gameStarted,gameOver]);
     
     const setLevel = (level) =>{
+        
         dispatch(ChangeDifficulty(level))
+        setTimeout(() => {
+            dispatch(ResetGame());
+            console.log(Properties[level].size)
+
+
+        }, 100);
     }
+    useEffect(() => {
+        dispatchMatrix({ type: 'SET_MATRIX', matrix: initialMatrix });
+
+    }, [Properties[level].size])
+    
   return (
     <div className='menu'>
         <div className='time-logo'>
