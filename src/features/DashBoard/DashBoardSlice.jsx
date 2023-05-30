@@ -43,8 +43,9 @@ export const DashBoardSlice = createSlice({
     ResetGame:(state)=>{
       state.flagsInUse = 0;
       state.gameStarted = false;
-      state.ClickLocation = [-1,-1]
       state.timer = 0 
+      state.ClickLocation = [-1,-1]
+    
     }
   }
 })

@@ -36,7 +36,7 @@ const Game = () => {
       return matrix;
     })();
     
-    function matrixReducer(state = initialMatrix, action) {
+    function matrixReducer(state, action) {
       switch (action.type) {
         case 'SET_MATRIX':
           return action.matrix;
@@ -49,7 +49,8 @@ const Game = () => {
           }
            return updatedMatrix 
           case 'INITIAL_STATE':
-            return initialMatrix
+            const initial = [...initialMatrix] // get exist matrix
+            return initial;
         default:
           return state;
       }
@@ -71,21 +72,19 @@ const Game = () => {
         }
       }
       if(win) setWinTime(true)
-      console.log(matrix);
 
     }, [matrix])
     
   
-    const playAgain = ()=>{
-      dispatch(ResetGame())
-      dispatchMatrix({type:'INITIAL_STATE'})
-  }
+
+
+
     return (
     <div className='game-page'>
         <Menu/>
         <Board matrix={matrix} dispatchMatrix={dispatchMatrix}/>
-        {gameOver && <GameOver matrix={matrix} dispatchMatrix={dispatchMatrix} playAgain={playAgain}/>}
-        {winTime && <Winner playAgain={playAgain}/>}
+        {gameOver && <GameOver matrix={matrix} dispatchMatrix={dispatchMatrix} initialMatrix={initialMatrix}/>}
+        {winTime && <Winner />}
     </div>
   )
 }

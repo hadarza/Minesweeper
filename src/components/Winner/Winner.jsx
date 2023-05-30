@@ -3,7 +3,7 @@ import {images} from '../../constants/index'
 import { useDispatch } from 'react-redux'
 import { resetTimer } from '../../features/DashBoard/DashBoardSlice'
 
-const Winner = ({playAgain}) => {
+const Winner = () => {
   const [showWinner,setshowWinner] = useState(true) //show game over message after the delay of revealing the bombs
 
   const dispatch = useDispatch()
@@ -20,7 +20,7 @@ const Winner = ({playAgain}) => {
           <img src={images.winner}/>
         </div>
         <button className='playAgain' onClick={()=>{
-          playAgain()
+          // playAgain()
           setshowWinner(false)
         }}>תראה לכולם כמה טוב את/ה שוב!</button>
       </div>

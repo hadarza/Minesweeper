@@ -137,6 +137,7 @@ useEffect(() => {
   }
 }, [clickLocation])
 
+
   return (
     <div className="Board-game">
       {matrix.map((row, rowIndex) => (
