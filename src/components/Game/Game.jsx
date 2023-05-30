@@ -1,13 +1,13 @@
 import React,{useReducer, useState,useEffect} from 'react'
+import { useSelector } from 'react-redux'
+
 import Menu from '../DashBoard/Menu/Menu'
 import Board from '../DashBoard/Board/Board'
-import GameOver from '../GameOver/GameOver'
-import { useSelector,useDispatch } from 'react-redux'
-import Winner from '../Winner/Winner'
-import {ResetGame} from '../../features/DashBoard/DashBoardSlice'
+import MsgUser from '../MsgUser/MsgUser'
+
+import {images} from '../../constants/index'
 
 const Game = () => {
-  const dispatch = useDispatch()
   const game = useSelector((state) => state.dashboard);
   const [winTime,setWinTime] = useState(false);
   const {gameOver,Properties,level} = game;
@@ -36,7 +36,7 @@ const Game = () => {
       return matrix;
     })();
     
-    function matrixReducer(state = initialMatrix, action) {
+    function matrixReducer(state, action) {
       switch (action.type) {
         case 'SET_MATRIX':
           return action.matrix;
@@ -47,9 +47,7 @@ const Game = () => {
             ...updatedMatrix[x][y],
             flagged:flagged // set flagged based on action.payload
           }
-           return updatedMatrix 
-          case 'INITIAL_STATE':
-            return initialMatrix
+          return updatedMatrix 
         default:
           return state;
       }
@@ -61,6 +59,7 @@ const Game = () => {
       var win = false;
       for (let i = 0; i < size; i++) {
         for (let j = 0; j < size; j++) {
+          // if all cells that aren't x - are revealed so user win!
           if(matrix[i][j].value != 'x'){
             if(matrix[i][j].revealed) win = true;
             else {
@@ -71,20 +70,27 @@ const Game = () => {
         }
       }
       if(win) setWinTime(true)
+      console.log(matrix)
     }, [matrix])
     
-  
-    const playAgain = ()=>{
-      dispatch(ResetGame())
-      dispatchMatrix({type:'INITIAL_STATE'})
-      console.log(matrix);
-  }
     return (
     <div className='game-page'>
-        <Menu/>
+        <Menu initialMatrix={initialMatrix} dispatchMatrix={dispatchMatrix}/>
         <Board matrix={matrix} dispatchMatrix={dispatchMatrix}/>
-        {gameOver && <GameOver matrix={matrix} dispatchMatrix={dispatchMatrix} playAgain={playAgain}/>}
-        {winTime && <Winner playAgain={playAgain}/>}
+        {gameOver && <MsgUser 
+        initialMatrix={initialMatrix}
+         dispatchMatrix={dispatchMatrix} 
+         title="אני רוצה לנסות שוב"
+         img={images.bomb}
+         altImg="Bomb"/>}
+
+        {winTime && <MsgUser 
+        initialMatrix={initialMatrix}
+         dispatchMatrix={dispatchMatrix} 
+         title="תרא/ה לכולם כמה טוב אתה!"
+         img={images.winner}
+         altImg="winner"/>}
+
     </div>
   )
 }

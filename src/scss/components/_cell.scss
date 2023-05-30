@@ -1,6 +1,7 @@
 .cell{
-    width: 2.5rem;
-    height: 2.5rem;
+  cursor: pointer;
+    width: 2.2rem;
+    height: 2.2rem;
     background-color: white;
     margin: 0.2rem;
     border-radius:3px;
@@ -16,18 +17,24 @@
     background-color:gainsboro;
     cursor: pointer;
 }
-@for $indexA from 0 through 10 {
-    @for $indexB from 0 through 10 {
+@for $indexA from 0 through 20 {
+    @for $indexB from 0 through 20 {
       .cell-#{$indexA}-#{$indexB} {
-        @include cell($indexA,$indexB,false)
+        @include cell($indexA,$indexB,false);
+        cursor:pointer;
+        pointer-events: auto;
       }
     }
 }
 
-@for $indexA from 0 through 10 {
-    @for $indexB from 0 through 10 {
+@for $indexA from 0 through 20 {
+    @for $indexB from 0 through 20 {
       .cellActive-#{$indexA}-#{$indexB} {
-        @include cell($indexA,$indexB,true)
+        @include cell($indexA,$indexB,true);
+        cursor:auto !important;
+        pointer-events: none !important;
+
+
       }
     }
 }

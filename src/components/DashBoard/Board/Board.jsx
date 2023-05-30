@@ -1,6 +1,6 @@
 import React, {useEffect } from 'react';
 import { useSelector,useDispatch } from 'react-redux';
-import {setGameStart} from '../../../features/DashBoard/DashBoardSlice'
+import {setGameStart,setFlagsInUse} from '../../../features/DashBoard/DashBoardSlice'
 import Cell from '../Cell/Cell';
 
 const Board = ({matrix,dispatchMatrix}) => {
@@ -10,7 +10,7 @@ const Board = ({matrix,dispatchMatrix}) => {
 
   // based on difficulty - we decide the size of our matrix
   // for easy 9*9. for medium 12*12. for hard 16*16
-  const {Properties,level,gameStarted} = game;
+  const {Properties,level,gameStarted,flagsInUse} = game;
   let bombTotal = Properties[level].bombs
   let size = Properties[level].size
 
@@ -26,6 +26,15 @@ const Board = ({matrix,dispatchMatrix}) => {
     matrix[x][y]={
      ...matrix[x][y],
      revealed: true
+   }
+   if (matrix[x][y].flagged){ // flag will disapear - so inc num of flags in one
+    var updatedMatrix = [...matrix]
+    updatedMatrix[x][y]={
+      ...updatedMatrix[x][y],
+      flagged: false
+    }
+    dispatchMatrix({type:'SET_MATRIX',matrix:updatedMatrix})
+      dispatch(setFlagsInUse(-1))
    }
   }
 /* placing bombs on the board */
@@ -89,8 +98,8 @@ const countNeighborsBomb=(x,y)=>{
 
 const FindBorderNeighbor = (x,y)=>{
   const updatedMatrix = [...matrix]
-  for(let xAxis=-1;xAxis<=1;xAxis++){
-    for(let yAxis=-1;yAxis<=1;yAxis++){
+  for(let xAxis = -1;xAxis <= 1;xAxis++){
+    for(let yAxis = -1;yAxis <= 1;yAxis++){
       if(isValidIndex(x,y,xAxis,yAxis)){
         if(matrix[x][y].value === 0) {
           SetRevealCell(updatedMatrix,x+xAxis,y+yAxis)
@@ -111,6 +120,7 @@ const RevealCells = (x, y) => {
       }
     }
   }
+
    // reveal his neighbors - create for us a border of cells around the 0's cells
     FindBorderNeighbor(x,y);
 }
@@ -121,10 +131,11 @@ const isValidIndex = (x,y,xAxis,yAxis)=>{
 
 useEffect(() => {
   if(clickLocation[0] != -1 && clickLocation[1] != -1){
-    if(!gameStarted) PlacingBombs(clickLocation) // set matrix
-    RevealCells(clickLocation[0], clickLocation[1])
+    if(!gameStarted) PlacingBombs(clickLocation) // set bombs
+      RevealCells(clickLocation[0], clickLocation[1])
   }
 }, [clickLocation])
+
 
   return (
     <div className="Board-game">
@@ -136,8 +147,7 @@ useEffect(() => {
             locationX={rowIndex}
             locationY={columnIndex} 
             matrix = {matrix}
-            dispatchMatrix={dispatchMatrix}
-             />
+            dispatchMatrix={dispatchMatrix}/>
           ))}
         </div>
       ))}
